@@ -1,0 +1,442 @@
+[colors]
+;background = ${xrdb:color0:#222}
+;ARGB, no RGBA
+;background = #232629
+background = #00232629
+background-alt = #00313639
+;foreground = ${xrdb:color7:#222}
+foreground = #eff0f1
+;foreground = #322a73
+;foreground = #B20000
+;foreground = #00FF00
+;foreground = #232629
+foreground-alt = #ffff00
+primary = #31363b
+secondary = #ff00ff
+alert = #ed1515
+
+color0 = #212121
+color1 = #C30771
+color2 = #10A778
+color3 = #A89C14
+color4 = #008EC4
+color5 = #523C79
+color6 = #20A5BA
+color7 = #D9D9D9
+color8 = #424242
+color9 = #FB007A
+color10 = #5FD7AF
+color11 = #F3E430
+color12 = #20BBFC
+color13 = #6855DE
+color14 = #4FB8CC
+color15 = #F1F1F1
+
+
+[bar/mystatus]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 24
+
+offset-x = 0%
+offset-y = 0%
+
+radius = 0.0
+fixed-center = true
+
+bottom = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+#line-color = #ff80ff
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+;font-0 = Hack:weight=bold:pixelsize=9;1
+font-0 = Inconsolata:bold:pixelsize=10;1
+;font-0 = Noto sans:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = FontAwesome:pixelsize=11;1
+
+#modules-left = i3 xwindow 
+#modules-right = filesystem memory cpu temperature volume backlight-acpi battery date time
+modules-left = i3 
+#modules-center = xwindow
+#modules-center = filesystem
+#modules-right = temperature volume backlight-acpi battery date time
+modules-right = mpd filesystem wireless-network wired-network volume backlight-acpi battery temperature date time
+
+tray-position = right
+;tray-padding = 20
+tray-background = #00232629
+;tray-transparent = false
+tray-transparent = true
+
+locale = es_CL.UTF-8
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+[module/xwindow]
+type = internal/xwindow
+label = [ %title:0:30:...% ]
+label-foreground = #3daee9
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = 
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = / 
+
+label-mounted =  %mountpoint%: %used% (%percentage_used%%)
+label-unmounted = %mountpoint% not mounted
+
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline = #fab1c3
+;label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+ws-icon-0 = 1;1
+ws-icon-1 = 2;2
+ws-icon-2 = 3;3
+ws-icon-3 = 4;4
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-9 = 10;10
+ws-icon-default = 
+
+;wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 0
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+;label-focused = %index%
+label-focused = %icon%
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${colors.foreground}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+#label-unfocused-underline = ${colors.color2}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-background = ${self.label-focused-background}
+;label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+
+[module/mpd]
+type = internal/mpd
+; Host where mpd is running (either ip or domain name)
+; Can also be the full path to a unix socket where mpd is running.
+host = 127.0.0.1
+port = 6600
+# password = 
+label-song = 🎜 %artist% - %title%
+label-offline = 🎜 mpd is offline
+
+
+[module/xbacklight]
+type = internal/backlight
+
+;format = <label> <bar>
+format = <ramp> <label>
+label = %percentage%%
+
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+bar-width = 5
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+;format-underline = ${colors.color2}
+
+[module/cpu]
+type = internal/cpu
+interval = 5
+format = <ramp-coreload> <label>
+format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = ${colors.color4}
+label = %percentage:2%%
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+[module/memory]
+type = internal/memory
+interval = 5
+format-prefix = "MEM:"
+format-prefix-foreground = ${colors.foreground}
+;format-underline = ${colors.color3}
+# label = %gb_used% (%percentage_used%%)
+label = %percentage_used%%
+
+[module/wired-network]
+type = internal/network
+interface = enp2s0
+interval = 5.0
+
+format-connected = <ramp-signal> <label-connected>
+;format-connected-underline = #9f78e1
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+
+[module/wireless-network]
+type = internal/network
+interface = wlp1s0
+interval = 5.0
+
+label-connected =  %local_ip% %essid%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%Y-%m-%d (%a)"
+;date = "%d-%m-%y"
+;date-alt = " %Y-%m-%d"
+
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground}
+;format-underline = ${colors.color9}
+
+label = %date%
+
+[module/time]
+type = internal/date
+interval = 5
+
+time = "%H:%M"
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+;format-underline = ${colors.color10}
+
+label = %time%
+
+[module/volume]
+type = internal/volume
+
+;format-volume = <label-volume> <bar-volume>
+format-volume = <label-volume>
+;format-volume-underline = ${colors.color1}
+label-volume = " %percentage%%"
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = 
+format-muted-foreground = ${colors.foreground}
+;format-muted-underline = ${colors.color3}
+label-muted =  muted
+
+bar-volume-width = 5
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ACAD
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+;format-charging-underline = ${colors.color8}
+
+format-discharging = <ramp-capacity> <label-discharging>
+;format-discharging-underline = ${colors.color4}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground}
+;format-full-underline = ${colors.color8}
+
+ramp-capacity-0 = ""
+ramp-capacity-1 = ""
+ramp-capacity-2 = ""
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = ""
+animation-charging-1 = ""
+animation-charging-2 = ""
+animation-charging-foreground = ${colors.foreground}
+animation-charging-framerate = 750
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <label>
+;format-underline = ${colors.color5}
+format-warn = <label-warn>
+format-warn-underline = ${colors.color5}
+
+label = " %temperature%"
+label-warn = " %temperature%"
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = false
+
+format-spacing = 1
+
+label-open = ""
+label-open-foreground = ${colors.foreground}
+label-close = Back
+label-close-foreground = ${colors.foreground}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; vim:ft=dosini

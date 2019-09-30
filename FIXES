@@ -1,0 +1,30 @@
+Este archivo existe con la finalidad de que al cambiarme de distro pueda 
+recordar las configuraciones en archivos que no se encuentren en /home
+
+
+Eliminar beep:
+echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+
+Arreglar comportamiento de tapa notebook:
+en /etc/systemd/logind.conf
+  cambiar '#HandleLidSwitch=suspend' por 'HandleLidSwitch=ignore'
+
+Cambiar greeter lightdm:
+en /etc/lightdm/lightdm.conf
+en la linea que contiene 'greeter-session=' colocar como valor el nombre
+del greeter (ej: greeter-session=lightdm-gtk-greeter)
+
+Configurar initramfs:
+
+"When an initramfs with the base hook is used, which is the default, the resume hook is required in /etc/mkinitcpio.conf. Whether by label or by UUID, the swap partition is referred to with a udev device node, so the resume hook must go after the udev hook. This example was made starting from the default hook configuration:
+
+    HOOKS="base udev resume autodetect modconf block filesystems keyboard fsck
+
+    Remember to rebuild the initramfs for these changes to take effect."
+Agregar parametro "resume" a variable "HOOKS" en /etc/mkinitcpio.conf
+Luego, regenerar la imagen com mkinitcpio -p linux
+
+Cambiar automaticamente a audifono USB/bluetooth (pulseaudio)
+agregar a /etc/pulse/default.pa la siguiente línea:
+load-module module-switch-on-connect
+

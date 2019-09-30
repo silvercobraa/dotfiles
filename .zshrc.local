@@ -1,0 +1,95 @@
+#Esta wea pone el prompt en formato largo
+prompt grml-large
+
+# esta wea hace que se calle el maldito beep
+alias shutup='xset b off'
+
+# wena tula m3n
+alias m3n='man'
+
+# gcc con varias opciones
+alias gccbrigido='gcc -Werror -Wall -Wextra -pedantic-errors -Wcast-align -Wcast-qual -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-include-dirs -Wredundant-decls -Wshadow -Wstrict-overflow=5'
+
+# clang con varias opciones
+alias clangbrigido='clang -Weverything -Werror'
+
+# esta wea se supone que configura el proxy...
+# No se porque diablos no puedo escapar las comillas simples con \'
+alias proxyudec='export http_proxy='"'"'192.168.40.1:3128'"'"''
+
+# better than cat
+alias dog='cat'
+
+# Esta wea updatea el grub
+alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
+
+# esta wea es para no escribir tanto al usar xclip
+alias xclipbi='xclip -selection clipboard'
+
+grml_prompt_pre_default=(
+    at                ''
+    battery           ' '
+    change-root       ''
+    date              '%F{blue}'
+    grml-chroot       '%F{red}'
+    history           '%F{green}'
+    host              ''
+    jobs              '%F{cyan}'
+    newline           ''
+    path              '%B'
+    percent           ''
+    rc                '%B%F{red}'
+    rc-always         ''
+    sad-smiley        '%F{red}'
+    shell-level       '%F{red}'
+    time              '%F{blue}'
+    user              '%B%F{blue}'
+    vcs               ''
+)
+
+grml_prompt_post_default=(
+    at                ''
+    battery           ''
+    change-root       ''
+    date              '%f'
+    grml-chroot       '%f '
+    history           '%f'
+    host              ''
+    jobs              '%f'
+    newline           ''
+    path              '%b'
+    percent           ''
+    rc                '%f%b'
+    rc-always         ''
+    sad-smiley        ''
+    shell-level       '%f'
+    time              '%f'
+    user              '%f%b'
+    vcs               ''
+)
+
+grml_prompt_token_default=(
+#    at                '¯\_(ツ)_/¯'
+#    at                '(◠‿◠✿)'
+#    at                'ᕕ(ᐛ)ᕗ'
+    at                '@'
+    battery           'GRML_BATTERY_LEVEL'
+    change-root       'debian_chroot'
+    date              '%D{%Y-%m-%d}'
+    grml-chroot       'GRML_CHROOT'
+    history           '{history#%!} '
+    host              '%m '
+    jobs              '[%j running job(s)] '
+    newline           $'\n'
+    path              '%40<..<%~%<< '
+    percent           '%# '
+    rc                '%(?..%? )'
+    rc-always         '%?'
+    sad-smiley        '%(?..✖╭╮✖)'
+    sad-smiley        '%(?..)'
+    shell-level       '%(3L.+ .)'
+    time              '%D{%H:%M:%S} '
+    user              '%n'
+    vcs               '0'
+)
+

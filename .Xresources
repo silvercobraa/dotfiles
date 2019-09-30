@@ -1,0 +1,126 @@
+!! Colorscheme
+
+! special
+!*.foreground: #93a1a1
+!*.background: #141c21
+!*.cursorColor: #afbfbf
+
+! black
+!*.color0: #263640
+!*.color8: #4a697d
+
+! red
+!*.color1: #d12f2c
+!*.color9: #fa3935
+
+! green
+!*.color2: #819400
+!*.color10: #a4bd00
+
+! yellow
+!*.color3: #b08500
+!*.color11: #d9a400
+
+! blue
+!*.color4: #2587cc
+!*.color12: #2ca2f5
+
+! magenta
+!*.color5: #696ebf
+!*.color13: #8086e8
+
+! cyan
+!*.color6: #289c93
+!*.color14: #33c5ba
+
+! white
+!*.color7: #bfbaac
+!*.color15: #fdf6e3
+
+
+! special
+*.foreground: #93a1a1
+*.background: [97]#1f1f1f
+*.cursorColor: #afbfbf
+
+! black
+*.color0: #000000
+*.color8: #000000
+
+! red
+*.color1: #FF3030
+*.color9: #FF3030
+
+! green
+*.color2: #559A70
+*.color10: #559A70
+
+! yellow
+*.color3: #CCAC00
+*.color11: #CCAC00
+
+! blue
+*.color4: #0099CC
+*.color12: #0099CC
+
+! magenta
+*.color5: #CC69C8
+*.color13: #CC69C8
+
+! cyan
+*.color6: #7AC4CC
+*.color14: #7AC4CC
+
+! white
+*.color7: #BCCCCC
+*.color15: #BCCCCC
+
+
+!! URxvt Appearance
+URxvt.font: xft:inconsolata:pixelsize=14:antialias=true:hinting=true, xft:DejaVu Sans Mono:pixelsize=15
+URxvt.boldFont: xft:inconsolata:weight=bold:pixelsize=14:antialias=true:hinting=true, xft:DejaVu Sans Mono:pixelsize=18
+URxvt.italicFont: xft:inconsolata:pixelsize=14:antialias=true:hinting=true
+URxvt.boldItalicfont: xft:inconsolata:pixelsize=14:antialias=true:hinting=true
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 12
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: true
+URxvt.cursorColor: #00FF00
+URxvt.saveline: 8192
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.scrollTtyOutput: false
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+URxvt.urgentOnBell: true
+URxvt.depth: 32
+URxvt.iso14755: false
+
+!! Common Keybinds for Navigations
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
+URxvt.keysym.Control-Up: \033[1;5A
+URxvt.keysym.Control-Down: \033[1;5B
+URxvt.keysym.Control-Right: \033[1;5C
+URxvt.keysym.Control-Left: \033[1;5D
+
+!! Copy Paste & Other Extensions
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,resize-font
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.urlLauncher: firefox
+URxvt.underlineURLs: true
+URxvt.urlButton: 1
+
+!! requiere urxvt-resize-font-git (AUR)
+URxvt.keysym.Control-minus: resize-font:smaller
+URxvt.keysym.Control-plus: resize-font:bigger
+URxvt.keysym.Control-0: resize-font:reset

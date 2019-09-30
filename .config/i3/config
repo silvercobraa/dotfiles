@@ -1,0 +1,358 @@
+# vim: filetype=sh
+# i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+##
+# Definiciones
+##
+set $mod Mod4
+
+set $config_file /home/silvercobraa/.config/i3/config 
+
+# constantes
+set $audio_sink @DEFAULT_SINK@
+set $volume_delta 1
+set $brightness_delta 1 # valor para script python (absoluto)
+# set $brightness_delta 0.02 # valor para xbacklight (porcentual)
+set $default_inner_gaps_size 4
+
+#set $default_outer_gaps_size 0
+#set $inner_gaps_delta 0
+#set $outer_gaps_delta 0
+set $resize_delta 3
+
+# >apps
+set $term urxvt
+# set $term tilix
+# set $term termite
+set $editor vim
+set $browser firefox
+set $secondary_browser chromium --incognito
+set $mail_client thunderbird
+set $bittorrent_client qbittorrent
+set $monitor gnome-system-monitor
+set $player cantata
+
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+
+set $paper_white #FCFCFC
+set $cardboard_grey #EFF0F1
+set $icon_grey #4D4D4D
+set $charcoal_grey #31363B
+set $shade_black #232629
+set $plasma_blue #3DAEE9
+
+# Estas lineas son necesarias para i3-gaps
+#hide_edge_borders both
+for_window [class="^.*"] border pixel 1
+#gaps inner $default_inner_gaps_size
+#gaps outer $default_outer_gaps_size
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+#font pango:"Font Awesome 5 Free" bold 11
+font pango:Inconsolata regular 11
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+focus_follows_mouse no
+
+
+# atajos para aplicaciones
+bindsym $mod+Return exec $term
+bindsym $mod+e exec $term -e ranger
+bindsym $mod+b exec $browser
+bindsym $mod+d exec rofi -combi-modi drun#run -show combi
+bindsym $mod+Tab exec rofi -show window
+bindsym $mod+m exec $mail_client
+bindsym $mod+t exec $bittorrent_client
+bindsym $mod+g exec $monitor
+bindsym $mod+u exec pamac-manager
+bindsym $mod+colon exec $term -e '$editor $config_file'
+bindsym $mod+v exec $term -e '$editor /home/silvercobraa/.vimrc'
+bindsym $mod+a exec atom
+bindsym $mod+y exec $player
+bindsym $mod+c exec $term -e calcurse
+bindsym $mod+Shift+a exec audacity
+bindsym $mod+Shift+m exec musescore
+bindsym $mod+Shift+b exec $secondary_browser
+bindsym $mod+Shift+z exec zeal
+bindsym $mod+Shift+p exec /home/silvercobra/Programas/Python/playitslowly/app.py
+
+# atajos para modos
+#bindsym $mod+g mode "$mode_gaps"
+bindsym $mod+i mode "$mode_gaps_inner"
+bindsym $mod+o mode "$mode_gaps_outer"
+bindsym $mod+Escape mode "$mode_shutdown"
+bindsym $mod+r mode "resize"
+bindsym $mod+x mode "$mode_display"
+bindsym Control+Mod1+t exec $term 
+
+
+# capturas de pantalla
+# captura pantalla completa
+bindsym Print exec scrot '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Imágenes/Capturas/'
+# captura seleccion 
+bindsym --release $mod+Print exec scrot -s '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Imágenes/Capturas/'
+
+
+# bloquear pantalla
+bindsym $mod+BackSpace exec sh ~/.config/i3/lock.sh
+# relanzar polybar
+bindsym $mod+z exec ~/.config/polybar/launch.sh
+
+# COMANDO DE EMERGENCIA
+# cambia de workspace, mutea el volumen y ejecuta un comando de distraccion
+# bindsym $mod+Shift+BackSpace workspace lmao; exec pactl set-sink-volume $audio_sink 0%; exec $term -e cmatrix
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+##
+# ventanas
+##
+bindsym $mod+q kill
+bindsym $mod+f fullscreen toggle
+
+# foco
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# mover ventana enfocada
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+#bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+
+# toggle split vertical/horizontal
+bindsym $mod+s split toggle
+
+# layout
+bindsym $mod+w layout toggle
+
+# toggle tiling / floating
+bindsym $mod+space floating toggle
+# change focus between tiling / floating windows
+bindsym $mod+Shift+space focus mode_toggle
+
+
+##
+# workspaces
+##
+# cambiar workspace
+bindsym $mod+p workspace prev
+bindsym $mod+n workspace next
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+
+# volumen
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $audio_sink +$volume_delta%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $audio_sink -$volume_delta%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $audio_sink toggle
+
+# brillo
+# bindsym XF86MonBrightnessUp exec --no-startup-id python ~/.config/i3/brightness.py +$brightness_delta
+# bindsym XF86MonBrightnessDown exec --no-startup-id python ~/.config/i3/brightness.py -$brightness_delta
+bindsym XF86MonBrightnessUp exec xbacklight -inc $brightness_delta # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec $brightness_delta # decrease screen brightness
+
+
+##
+# modos
+##
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus $inner_gaps_delta
+        bindsym minus gaps inner current minus $inner_gaps_delta
+        bindsym d     gaps inner current set $default_inner_gaps_size
+        bindsym 0     gaps inner current set 0
+        bindsym i     gaps inner current set 0; mode "default"
+
+        bindsym Shift+plus  gaps inner all plus $inner_gaps_delta
+        bindsym Shift+minus gaps inner all minus $inner_gaps_delta
+        bindsym Shift+d     gaps inner all set $default_inner_gaps_size
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus $outer_gaps_delta
+        bindsym minus gaps outer current minus $outer_gaps_delta
+        bindsym d     gaps outer current set $default_outer_gaps_size
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus $outer_gaps_delta
+        bindsym Shift+minus gaps outer all minus $outer_gaps_delta
+        bindsym Shift+d     gaps outer all set $default_outer_gaps_size
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# no olvidar salir del modo antes de ejecutar los comandos, de lo contrario el modo seguira ahi luego de suspender/hibernar/etc...
+mode "$mode_shutdown" {
+        bindsym g      mode "default"; exec dm-tool switch-to-greeter;
+		# cerrar la sesion
+        bindsym c      mode "default"; exec i3-msg exit;
+        bindsym h      mode "default"; exec sh ~/.config/i3/lock.sh; exec systemctl hibernate
+        bindsym s      mode "default"; exec sh ~/.config/i3/lock.sh; exec systemctl suspend
+        bindsym p      exec systemctl poweroff
+        bindsym r      exec systemctl reboot
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+mode "resize" {
+        bindsym h resize shrink width $resize_delta px or $resize_delta ppt
+        bindsym j resize grow height $resize_delta px or $resize_delta ppt
+        bindsym k resize shrink height $resize_delta px or $resize_delta ppt
+        bindsym l resize grow width $resize_delta px or $resize_delta ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+## Manual management of external displays
+# Set the shortcuts and what they do
+set $mode_display Ext Screen
+mode "$mode_display" {
+    #bindsym v exec --no-startup-id xrandr --output VGA1 --auto --right-of eDP1, mode "default"
+    #bindsym h exec --no-startup-id xrandr --output HDMI1 --auto --right-of eDP1, mode "default"
+    #bindsym x exec --no-startup-id xrandr --output VGA1 --auto --off, mode "default"
+    #bindsym y exec --no-startup-id xrandr --output HDMI1 --auto --off, mode "default"
+
+    #bindsym d exec --no-startup-id xrandr --output VGA1 --auto --same-as eDP1
+	# NO MAPEAR MAYUSCULAS! NO FUNCIONA
+    #bindsym s exec --no-startup-id xrandr --output LVDS1 --auto --output HDMI1 --auto --same-as eDP1
+
+    bindsym d exec --no-startup-id xrandr --output LVDS1 --auto --output HDMI1 --auto --same-as eDP1
+    bindsym x exec --no-startup-id xrandr --output HDMI1 --auto --off, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+set $background #292929
+set $statusline #FEFEFE
+#set $separator #3DAEE9
+set $separator #292929
+
+##
+# barra
+##
+bar {
+         status_command i3status
+         #status_command i3blocks
+         #i3bar_command i3bar -t
+         position top
+colors {
+             # recordar que los iconos de la bandeja del sistema siempre son 100% transparentes cuando se setea transparencia en la barra
+            background $background
+            statusline $statusline
+            separator $separator
+            # border background foreground
+            focused_workspace  #3DAEE9 #292929 #FEFEFE
+            active_workspace   #292929 #292929 #FEFEFE
+            inactive_workspace #292929 #292929 #EFF0F1
+            urgent_workspace   #292929 #292929 #FEFEFE
+   	 }
+}
+
+
+##
+# Aplicaciones de inicio
+##
+# Setea el layout del teclado
+exec --no-startup-id setxkbmap -layout latam
+# Ejecuto el compositor
+# "--vsync requires an argument"
+#exec --no-startup-id compton --backend glx --paint-on-overlay --vsync
+exec --no-startup-id compton --backend glx --paint-on-overlay --vsync opengl-mswc
+# Ejecuta red-shift al iniciar
+exec --no-startup-id redshift-gtk
+# Setea el fondo
+exec --no-startup-id feh --bg-fill ~/.config/wallpaper
+# inicia el applet del NetworkManager
+exec --no-startup-id nm-applet
+# icono del gestor de paquetes
+exec --no-startup-id pamac-tray
+# ejecuto el demonio del reproductor de musica
+#exec --no-startup-id mpd
+# permite hacer click con el touchpad
+# formato: xinput set-prop <device> <property> <value>
+# (ver: man xinput)
+# RECORDATORIO: INDICAR DEVICE Y PROPERTY POR SU NOMBRE YA QUE EL ID PUEDE CAMBIAR EN CADA REINICIO
+exec --no-startup-id xinput set-prop "Synaptics TM3096-006" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop "Synaptics TM3096-006" "libinput Horizontal Scroll Enabled" 0
+# permite ejecutar pamac-manager, entre otras cosas que requieren permisios
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+# oculta el cursor despues de un tiempo
+#exec --no-startup-id unclutter -idle 1
+# lanza el demonio para automontar sistemas de archivos
+exec --no-startup-id udiskie
+# lanza el demonio de notificaciones
+exec --no-startup-id dunst
+# lanza conky
+#exec --no-startup-id conky -c ~/.conky/skeleton
+#exec --no-startup-id conky -c ~/.conky/syclo/syclo-cyan-topleft.conkyrc
+# carga .Xresources
+exec --no-startup-id xrdb ~/.Xresources
+
+##
+# Scripts
+##
+# script para revisar el nivel de la bateria
+exec --no-startup-id ~/.config/i3/hibernate.sh
+# lanza polybar
+exec --no-startup-id ~/.config/polybar/launch.sh
