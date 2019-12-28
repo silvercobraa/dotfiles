@@ -11,9 +11,9 @@ set -x QT_QPA_PLATFORMTHEME qt5ct
 #echo -e '\t(C)Copyright Microsoft Corp 1981-1995'
 
 set fish_greeting
-alias python "python3"
-alias pip "pip3"
-alias ipython "ipython3"
+#alias python "python3"
+#alias pip "pip3"
+#alias ipython "ipython3"
 
 # start X at login 
 #if status --is-login

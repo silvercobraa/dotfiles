@@ -88,7 +88,7 @@ URxvt.internalBorder: 12
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: true
 URxvt.cursorColor: #00FF00
-URxvt.saveline: 8192
+URxvt.saveline: 16384
 URxvt.scrollBar: false
 URxvt.scrollBar_right: false
 URxvt.scrollTtyOutput: false

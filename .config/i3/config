@@ -12,8 +12,9 @@ set $config_file /home/silvercobraa/.config/i3/config
 # constantes
 set $audio_sink @DEFAULT_SINK@
 set $volume_delta 1
-set $brightness_delta 1 # valor para script python (absoluto)
+# set $brightness_delta 1 # valor para script python (absoluto)
 # set $brightness_delta 0.02 # valor para xbacklight (porcentual)
+set $brightness_delta 1 # valor para brightnessctl (porcentual)
 set $default_inner_gaps_size 4
 
 #set $default_outer_gaps_size 0
@@ -190,9 +191,10 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $audio_sink toggl
 # brillo
 # bindsym XF86MonBrightnessUp exec --no-startup-id python ~/.config/i3/brightness.py +$brightness_delta
 # bindsym XF86MonBrightnessDown exec --no-startup-id python ~/.config/i3/brightness.py -$brightness_delta
-bindsym XF86MonBrightnessUp exec xbacklight -inc $brightness_delta # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec $brightness_delta # decrease screen brightness
-
+# bindsym XF86MonBrightnessUp exec xbacklight -inc $brightness_delta # increase screen brightness
+# bindsym XF86MonBrightnessDown exec xbacklight -dec $brightness_delta # decrease screen brightness
+bindsym XF86MonBrightnessUp exec brightnessctl s 1%+
+bindsym XF86MonBrightnessDown exec brightnessctl s 1%-
 
 ##
 # modos
@@ -240,10 +242,10 @@ mode "$mode_shutdown" {
         bindsym g      mode "default"; exec dm-tool switch-to-greeter;
 		# cerrar la sesion
         bindsym c      mode "default"; exec i3-msg exit;
-        bindsym h      mode "default"; exec sh ~/.config/i3/lock.sh; exec systemctl hibernate
-        bindsym s      mode "default"; exec sh ~/.config/i3/lock.sh; exec systemctl suspend
-        bindsym p      exec systemctl poweroff
-        bindsym r      exec systemctl reboot
+        bindsym h      mode "default"; exec sh ~/.config/i3/lock.sh; exec systemctl hibernate -i
+        bindsym s      mode "default"; exec sh ~/.config/i3/lock.sh; exec systemctl suspend -i
+        bindsym p      exec systemctl poweroff -i
+        bindsym r      exec systemctl reboot -i
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -332,11 +334,11 @@ exec --no-startup-id pamac-tray
 # formato: xinput set-prop <device> <property> <value>
 # (ver: man xinput)
 # RECORDATORIO: INDICAR DEVICE Y PROPERTY POR SU NOMBRE YA QUE EL ID PUEDE CAMBIAR EN CADA REINICIO
-exec --no-startup-id xinput set-prop "Synaptics TM3096-006" "libinput Tapping Enabled" 1
-exec --no-startup-id xinput set-prop "Synaptics TM3096-006" "libinput Horizontal Scroll Enabled" 0
+exec --no-startup-id xinput set-prop "ELAN061B:00 04F3:309E Touchpad" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop "ELAN061B:00 04F3:309E Touchpad" "libinput Horizontal Scroll Enabled" 0
 # permite ejecutar pamac-manager, entre otras cosas que requieren permisios
-#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 # oculta el cursor despues de un tiempo
 #exec --no-startup-id unclutter -idle 1
 # lanza el demonio para automontar sistemas de archivos

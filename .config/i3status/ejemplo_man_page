@@ -82,11 +82,11 @@ cpu_temperature 0 {
 disk "/" {
         #format = " %used / %total (%percentage_used)"
         #format = " HDD: %used / %total (%percentage_used)"
-        format = " HDD: %used (%percentage_used)"
+        format = " root: %used / %total (%percentage_used)"
 }
 
 disk "/home" {
-        format = " SSD: %used (%percentage_used)"
+        format = " home: %used / %total (%percentage_used)"
 }
 
 volume master {
