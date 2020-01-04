@@ -56,7 +56,7 @@ for_window [window_role="task_dialog"] floating enable
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:"Font Awesome 5 Free" bold 11
-font pango:Inconsolata regular 11
+font pango:Inconsolata regular 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -159,28 +159,28 @@ bindsym $mod+Shift+space focus mode_toggle
 bindsym $mod+p workspace prev
 bindsym $mod+n workspace next
 
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace 一
+bindsym $mod+2 workspace 二
+bindsym $mod+3 workspace 三
+bindsym $mod+4 workspace 四
+bindsym $mod+5 workspace 五
+bindsym $mod+6 workspace 六
+bindsym $mod+7 workspace 七
+bindsym $mod+8 workspace 八
+bindsym $mod+9 workspace 九
+bindsym $mod+0 workspace 十
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace 一
+bindsym $mod+Shift+2 move container to workspace 二
+bindsym $mod+Shift+3 move container to workspace 三
+bindsym $mod+Shift+4 move container to workspace 四
+bindsym $mod+Shift+5 move container to workspace 五
+bindsym $mod+Shift+6 move container to workspace 六
+bindsym $mod+Shift+7 move container to workspace 七
+bindsym $mod+Shift+8 move container to workspace 八
+bindsym $mod+Shift+9 move container to workspace 九
+bindsym $mod+Shift+0 move container to workspace 十
 
 
 # volumen
@@ -302,7 +302,7 @@ colors {
             background $background
             statusline $statusline
             separator $separator
-            # border background foreground
+           # border background foreground
             focused_workspace  #3DAEE9 #292929 #FEFEFE
             active_workspace   #292929 #292929 #FEFEFE
             inactive_workspace #292929 #292929 #EFF0F1
@@ -319,13 +319,15 @@ exec --no-startup-id setxkbmap -layout latam
 # Ejecuto el compositor
 # "--vsync requires an argument"
 #exec --no-startup-id compton --backend glx --paint-on-overlay --vsync
-exec --no-startup-id compton --backend glx --paint-on-overlay --vsync opengl-mswc
+exec --no-startup-id picom
 # Ejecuta red-shift al iniciar
 exec --no-startup-id redshift-gtk
 # Setea el fondo
 exec --no-startup-id feh --bg-fill ~/.config/wallpaper
 # inicia el applet del NetworkManager
 exec --no-startup-id nm-applet
+# iniciar applet bluetooth
+exec --no-startup-id blueman-applet
 # icono del gestor de paquetes
 exec --no-startup-id pamac-tray
 # ejecuto el demonio del reproductor de musica
@@ -357,4 +359,4 @@ exec --no-startup-id xrdb ~/.Xresources
 # script para revisar el nivel de la bateria
 exec --no-startup-id ~/.config/i3/hibernate.sh
 # lanza polybar
-exec --no-startup-id ~/.config/polybar/launch.sh
+# exec --no-startup-id ~/.config/polybar/launch.sh
